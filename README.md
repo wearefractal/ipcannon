@@ -2,15 +2,15 @@
 
 <table>
 <tr> 
-<td>Package</td><td>APPNAME</td>
+<td>Package</td><td>ipcannon</td>
 </tr>
 <tr>
 <td>Description</td>
-<td>NOTHING HERE YET</td>
+<td>Distributed proxy</td>
 </tr>
 <tr>
 <td>Node Version</td>
-<td>>= 0.4</td>
+<td>>= 0.6</td>
 </tr>
 </table>
 
@@ -22,7 +22,7 @@ NOTHING HERE YET
 
 ## Examples
 
-You can view further examples in the [example folder.](https://github.com/wearefractal/APPNAME/tree/master/examples)
+You can view further examples in the [example folder.](https://github.com/wearefractal/ipcannon/tree/master/examples)
 
 ## LICENSE
 

@@ -1,3 +1,4 @@
 require('node-log').setName 'APPNAME'
 
-module.exports = {}
+module.exports =
+  Proxy: require './proxy'
