@@ -26,9 +26,7 @@ class Proxy extends EventEmitter
         return 'ipv4 not support'
     else # No prefix = testing
       @source[Math.floor(Math.random()*@source.length)]
-  
-module.exports =
-  
+
   launch: ->
     @bouncer = bouncy @handleRequest
     @bouncer.on 'listening', =>
@@ -49,6 +47,7 @@ module.exports =
       
     error 'missing host' unless req.headers.host?
     [host, port] = req.headers.host.split ':'
+    port ?= 80
     error 'bad host' if host in @getBlocked()
     req.on 'error', => bounce.error 'invalid request'
     stream = net.createConnection port, host, @getIp()
