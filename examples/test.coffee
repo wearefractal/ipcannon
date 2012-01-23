@@ -3,14 +3,15 @@ http = require 'http'
 log = require 'node-log'
 log.setName 'ipcannon-test'
 
-proxy = new Proxy {host: '127.0.0.1', port: 8080}
+proxy = new Proxy 
+  host: '127.0.0.1'
+  port: 8080
+  source: ['192.168.1.101']
 
 # Event handling
 proxy.on 'request', (req) -> log.debug "Proxying request to #{req.headers.host}"
   
 proxy.on 'error', (err, req) -> log.error err
-  
-proxy.launch()
 
 proxy.on 'ready', (host, port) -> 
   log.info "Proxy started on #{host}:#{port}"
@@ -23,9 +24,10 @@ proxy.on 'ready', (host, port) ->
       host: 'checkip.dyndns.org'
     
   http.get options, (res) ->
+    console.log 'Test request sent'
     res.setEncoding "utf8"
-    body = ''
+    body = 'START: '
     res.on 'data', (chunk) -> body += chunk
-    res.on 'end', -> 
-      log.debug body
-      #proxy.close()
+    res.on 'end', -> log.debug body
+    
+proxy.launch()

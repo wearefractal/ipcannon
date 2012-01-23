@@ -10,7 +10,8 @@
    "dependencies":{
       "coffee-script":"*",
       "node-log":"*",
-      "bouncy":"*"
+      "bouncy":"*",
+      "ipbind":"*"
    },
    "engines":{
       "node":">= 0.6.0"
