@@ -16,8 +16,18 @@ class Proxy extends EventEmitter
   getHost: -> @bouncer.address().address
   getPort: -> @bouncer.address().port
   getBlocked: -> [@getHost(), @host]
-  getIp: -> @source[Math.floor(Math.random()*@source.length)]
-    
+  getIp: (prefix) ->
+    #TODO: Variable length prefix, figure out how many sections need to be generated
+    if prefix?
+      if prefix.indexOf ':' > 0
+        rand = -> (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
+        return "#{prefix}:#{rand()}:#{rand()}:#{rand()}:#{rand()}" 
+      else
+        return 'ipv4 not support'
+    else # No prefix = testing
+      @source[Math.floor(Math.random()*@source.length)]
+  
+module.exports = -> "#{ rand() }-#{ rand() }-#{ rand() }-#{ rand() }-#{ rand() }"
   
   launch: ->
     @bouncer = bouncy @handleRequest

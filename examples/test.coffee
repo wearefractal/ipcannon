@@ -26,7 +26,7 @@ proxy.on 'ready', (host, port) ->
   http.get options, (res) ->
     console.log 'Test request sent'
     res.setEncoding "utf8"
-    body = 'START: '
+    body = ''
     res.on 'data', (chunk) -> body += chunk
     res.on 'end', -> log.debug body
     
