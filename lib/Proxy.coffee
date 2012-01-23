@@ -27,7 +27,7 @@ class Proxy extends EventEmitter
     else # No prefix = testing
       @source[Math.floor(Math.random()*@source.length)]
   
-module.exports = -> "#{ rand() }-#{ rand() }-#{ rand() }-#{ rand() }-#{ rand() }"
+module.exports =
   
   launch: ->
     @bouncer = bouncy @handleRequest
