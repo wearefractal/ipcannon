@@ -9,9 +9,12 @@
    
    "dependencies":{
       "coffee-script":"*",
-      "node-log":"*",
       "bouncy":"*",
       "ipbind":"*"
+   },
+   "devDependencies":{
+      "node-log":"*",
+      "benchmark":"*"
    },
    "engines":{
       "node":">= 0.6.0"
