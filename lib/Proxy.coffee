@@ -5,19 +5,28 @@ os = require 'os'
 bouncy = require 'bouncy'
 
 class Proxy extends EventEmitter
-  constructor: ({@interface, @host, @port, @maxConnections, @source}) ->
+  constructor: ({@interface, @host, @port, @maxConnections, @source, @cycler, @prefix}) ->
+    # Parse ip from interface if given
     if @interface?
       int = os.networkInterfaces()[@interface]
       throw 'Invalid interface' if !Array.isArray int
       @host = int[0].address
+      
     @host ?= 'localhost'
     @port ?= 80
-    @cycler = new Cycler({source: @source})
+    @cycler ?= new Cycler source: @source, prefix: @prefix
 
+  # Get IP of proxy
   getHost: -> @bouncer.address().address
+  
+  # Get port of proxy
   getPort: -> @bouncer.address().port
+  
+  # Don't enter an infinite loop of requests by bouncing to ourselves
+  # TODO: Expand thi into a true blacklist
   getBlocked: -> [@getHost(), @host]
 
+  # Start listening for and bouncing requests
   launch: ->
     @bouncer = bouncy @handleRequest
     @bouncer.on 'listening', =>
