@@ -24,7 +24,6 @@ proxy.on 'ready', (host, port) ->
       host: 'checkip.dyndns.org'
     
   http.get options, (res) ->
-    console.log 'Test request sent'
     res.setEncoding "utf8"
     body = ''
     res.on 'data', (chunk) -> body += chunk
