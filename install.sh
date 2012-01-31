@@ -1,4 +1,4 @@
-sudo apt-get install -y git-core python libssl-dev
+sudo apt-get install -y build-essential git-core python libssl-dev gcc g++
 git clone git://github.com/wearefractal/ipcannon.git /cannon
 git clone https://github.com/joyent/node.git
 cd node
