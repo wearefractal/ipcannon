@@ -1,3 +1,4 @@
+#/opt/node/bin node
 {Proxy, Cycler} = require './index'
 http = require 'http'
 log = require 'node-log'

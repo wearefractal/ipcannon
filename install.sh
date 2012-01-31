@@ -7,4 +7,6 @@ git checkout v0.6.8
 make
 sudo make install
 export PATH=$PATH:/opt/node/bin
+echo "export PATH=$PATH:/opt/node/bin" >> ~/.bashrc
+npm install coffee-script -g
 echo "Installation completed!"
