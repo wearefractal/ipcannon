@@ -46,21 +46,18 @@ class Proxy extends EventEmitter
       res.end msg
       
     error 'missing host' unless req.headers.target
-    matches = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/
-    if matches? and matches[1]
-      host = matches[1]
-      port = matches[2] or 80
-      path = matches[3] or '/'
-    else
-      error 'invalid host'
-    port ?= 80
+    matches = req.headers.target.match /^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/
+    error 'invalid host' unless matches? and matches[1]
+    host = matches[1]
+    port = matches[2] or 80
+    path = matches[3] or '/'
     error 'bad host' if host in @getBlocked()
     req.on 'error', => bounce.error 'invalid request'
     stream = net.createConnection port, host, @cycler.getIP()
     opts = 
       host: host
       port: port
-      path:  path
+      path: path
       headers:
         "x-forwarded-for": undefined
         "x-forwarded-port": undefined
