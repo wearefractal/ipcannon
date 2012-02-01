@@ -9,8 +9,8 @@ range = []
 range.push "216.19.216.#{x}" for x in [3..254]
 
 proxy = new Proxy 
-  host: '127.0.0.1'
-  port: 8080
+  host: '216.19.216.2'
+  port: 80
   source: range
 
 # Event handling

@@ -8,5 +8,6 @@ make
 sudo make install
 export PATH=$PATH:/opt/node/bin
 echo "export PATH=$PATH:/opt/node/bin" >> ~/.bashrc
-npm install coffee-script -g
+cd /cannon
+npm install -g
 echo "Installation completed!"
