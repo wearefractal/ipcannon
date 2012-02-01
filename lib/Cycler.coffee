@@ -8,7 +8,7 @@ class Cycler extends EventEmitter
     #@source ?= ['localhost']
     if @source?
       exec "ifconfig eth0 0.0.0.0"
-      exec "ifconfig eth0:#{idx} #{ip} netmask 255.255.255.248 up" for ip, idx in @source[0..50]
+      exec "ifconfig eth0:#{idx} #{ip}" for ip, idx in @source
     @range = 8 - @prefix.split(':').length if @prefix?
     
   # TODO: Support for ipv4 ranges
