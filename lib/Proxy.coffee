@@ -46,12 +46,26 @@ class Proxy extends EventEmitter
       res.end msg
       
     error 'missing host' unless req.headers.target?
-    [host, port] = req.headers.target.split ':'
+    if (m = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/)) and (m[1] or m[2] or m[3])
+      host = m[1] or "localhost"
+      port = m[2] or 80
+      path = m[3] if m[3]
+    else
+      error 'invalid host'
     port ?= 80
     error 'bad host' if host in @getBlocked()
     req.on 'error', => bounce.error 'invalid request'
     stream = net.createConnection port, host, @cycler.getIP()
-    bounce stream
+    opts = 
+      host: host
+      port: port
+      path:  path
+      headers:
+        "x-forwarded-for": undefined
+        "x-forwarded-port": undefined
+        "x-forwarded-proto": undefined
+        
+    bounce stream, opts
     @emit 'request', req
       
 module.exports = Proxy
