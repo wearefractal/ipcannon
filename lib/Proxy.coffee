@@ -45,8 +45,8 @@ class Proxy extends EventEmitter
       res.writeHead 400
       res.end msg
       
-    error 'missing host' unless req.headers.host?
-    [host, port] = req.headers.host.split ':'
+    error 'missing host' unless req.headers.target?
+    [host, port] = req.headers.target.split ':'
     port ?= 80
     error 'bad host' if host in @getBlocked()
     req.on 'error', => bounce.error 'invalid request'
