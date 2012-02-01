@@ -1,15 +1,14 @@
-get = require 'get'
+{get} = require 'http'
 log = require 'node-log'
 log.setName 'cannon-demo'
 
-
 options =
-  uri: 'http://216.19.216.2'
+  hostname: '216.19.216.2'
   headers:
-    target: 'checkip.dyndns.org'
-    
-dl = new get options
+    target: 'ifconfig.me'
       
-dl.asString (err, res) ->
-  throw err if err?
-  log.debug res
+get options, (res) ->
+  res.setEncoding 'utf8'
+  body = ''
+  res.on 'data', (chunk) -> body += chunk
+  res.on 'end', -> log.debug body

@@ -14,7 +14,7 @@ proxy = new Proxy
   source: range
 
 # Event handling
-proxy.on 'request', (req) -> log.debug "Proxying request to #{req.headers.host}"
+proxy.on 'request', (req) -> log.debug "Proxying request to #{req.headers.target}"
 proxy.on 'error', (err, req) -> log.error err
 proxy.on 'ready', (host, port) -> log.info "Proxy started on #{host}:#{port}"
   

@@ -31,7 +31,7 @@ class Proxy extends EventEmitter
     @bouncer = bouncy @handleRequest
     @bouncer.on 'listening', =>
       @bouncer.maxConnections = @maxConnections if @maxConnections?
-      @bouncer.on 'request', (req) => @emit 'request', req
+      #@bouncer.on 'request', (req) => @emit 'request', req
       @bouncer.on 'close', => @emit 'close'
       @emit 'ready', @getHost(), @getPort()
       
@@ -52,5 +52,6 @@ class Proxy extends EventEmitter
     req.on 'error', => bounce.error 'invalid request'
     stream = net.createConnection port, host, @cycler.getIP()
     bounce stream
+    @emit 'request', req
       
 module.exports = Proxy
