@@ -5,7 +5,7 @@ log.setName 'cannon-demo'
 options =
   hostname: '216.19.216.2'
   headers:
-    target: 'http://ifconfig.me/ip'
+    target: 'http://checkip.dyndns.org'
       
 get options, (res) ->
   res.setEncoding 'utf8'

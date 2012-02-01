@@ -46,10 +46,10 @@ class Proxy extends EventEmitter
       res.end msg
       
     error 'missing host' unless req.headers.target?
-    if (m = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/)) and (m[1] or m[2] or m[3])
-      host = m[1] or "localhost"
+    if (m = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/)) and m[1]
+      host = m[1]
       port = m[2] or 80
-      path = m[3] if m[3]
+      path = m[3] or '/'
     else
       error 'invalid host'
     port ?= 80
