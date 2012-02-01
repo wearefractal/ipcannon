@@ -45,14 +45,14 @@ class Proxy extends EventEmitter
       res.writeHead 400
       res.end msg
       
-    error 'missing host' unless req.headers.target
-    matches = req.headers.target.match /^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/
-    error 'invalid host' unless matches? and matches[1]
+    return error 'missing target' unless req.headers and req.headers.target
+    matches = String(req.headers.target).match /^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/
+    return error 'invalid target' unless matches and matches[1]
     host = matches[1]
     port = matches[2] or 80
     path = matches[3] or '/'
-    error 'bad host' if host in @getBlocked()
-    req.on 'error', => bounce.error 'invalid request'
+    return error 'bad target' if host in @getBlocked()
+    req.on 'error', => return error 'invalid request'
     stream = net.createConnection port, host, @cycler.getIP()
     opts = 
       host: host
