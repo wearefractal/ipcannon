@@ -45,11 +45,12 @@ class Proxy extends EventEmitter
       res.writeHead 400
       res.end msg
       
-    error 'missing host' unless req.headers.target?
-    if (m = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/)) and m[1]
-      host = m[1]
-      port = m[2] or 80
-      path = m[3] or '/'
+    error 'missing host' unless req.headers.target
+    matches = req.headers.target.match(/^(?:http:\/\/)?([^:\/]+)?(?::(\d+))?(\/.+)?$/
+    if matches? and matches[1]
+      host = matches[1]
+      port = matches[2] or 80
+      path = matches[3] or '/'
     else
       error 'invalid host'
     port ?= 80
