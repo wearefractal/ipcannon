@@ -7,6 +7,7 @@ class Cycler extends EventEmitter
   constructor: ({@source, @prefix}) ->
     #@source ?= ['localhost']
     if @source?
+      exec "ifconfig cannon 0.0.0.0"
       exec "ifconfig cannon:#{idx} #{ip}" for ip, idx in @source
     @range = 8 - @prefix.split(':').length if @prefix?
     
