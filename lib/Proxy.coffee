@@ -33,7 +33,7 @@ class Proxy extends EventEmitter
       @bouncer.maxConnections = @maxConnections if @maxConnections?
       #@bouncer.on 'request', (req) => @emit 'request', req
       @bouncer.on 'close', => @emit 'close'
-      @emit 'ready', @getHost(), @getPort()
+      @emit 'ready', @getHost(), @getPort(), (@source or @prefix)
       
     @bouncer.listen @port, @host
   
