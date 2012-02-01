@@ -1,10 +1,13 @@
 {EventEmitter} = require 'events'
+{exec} = require 'child_process'
 
 rand = -> (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1)
 
 class Cycler extends EventEmitter
   constructor: ({@source, @prefix}) ->
-    @source ?= ['localhost']
+    #@source ?= ['localhost']
+    if @source?
+      exec "ifconfig eth0:#{idx} #{ip}" for ip, idx in @source
     @range = 8 - @prefix.split(':').length if @prefix?
     
   # TODO: Support for ipv4 ranges

@@ -5,7 +5,7 @@ log.setName 'cannon-demo'
 options =
   hostname: '216.19.216.2'
   headers:
-    target: 'http://checkip.dyndns.org'
+    target: 'http://majorhayden.com'
       
 get options, (res) ->
   res.setEncoding 'utf8'
