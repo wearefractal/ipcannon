@@ -8,10 +8,13 @@ log.setName 'ipcannon'
 range = []
 range.push "216.19.216.#{x}" for x in [3..254]
 
+cycler = new Cycler
+  source: range
+  
 proxy = new Proxy 
   host: '216.19.216.2'
   port: 80
-  source: range
+  cycler: cycler
 
 # Event handling
 proxy.on 'request', (req) -> log.debug "Proxying request to #{req.headers.target}"
