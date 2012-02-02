@@ -22,13 +22,13 @@ proxy.on 'ready', (host, port, ips) ->
     host: '127.0.0.1'
     port: 8080
     headers:
-      target: 'http://checkip.dyndns.org/'
+      target: 'http://google.com/'
       #session: 'something'
       
   http.get options, (res) ->
     buff = ''
     console.log res.headers
-    res.on 'data', (chunk) -> buff += chunk
-    res.on 'end', -> log.info "Response: #{buff}"
+    #res.on 'data', (chunk) -> buff += chunk
+    #res.on 'end', -> log.info "Response: #{buff}"
     
 proxy.launch()

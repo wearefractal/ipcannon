@@ -66,6 +66,8 @@ class Proxy extends EventEmitter
       path: path
       responseHeaders:
         session: session
+      requestHeaders:
+        Connection: 'close'
         
     bounce stream, opts
     @emit 'request', req
