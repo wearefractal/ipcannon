@@ -19,7 +19,6 @@ proxy = new Proxy
 # Event handling
 proxy.on 'request', (req) -> log.debug "Proxying request to #{req.headers.target}"
 proxy.on 'error', (err, req) -> log.error err
-proxy.on 'ready', (host, port, range) -> 
-  log.info "Proxy started on #{host}:#{port} with #{range.length} IPs"
+proxy.on 'ready', (host, port) -> log.info "Proxy started on #{host}:#{port}"
   
 proxy.launch()
