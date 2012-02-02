@@ -2,7 +2,7 @@
 {networkInterfaces} = require 'os'
 Cycler = require './Cycler'
 {debase64} = require './util'
-bouncy = require 'bouncy'
+bouncy = require 'trouncy'
 {net} = require 'ipbind'
 
 class Proxy extends EventEmitter
@@ -66,10 +66,6 @@ class Proxy extends EventEmitter
       path: path
       responseHeaders:
         session: session
-      requestHeaders:
-        "x-forwarded-for": undefined
-        "x-forwarded-port": undefined
-        "x-forwarded-proto": undefined
         
     bounce stream, opts
     @emit 'request', req

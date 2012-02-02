@@ -9,7 +9,7 @@
    
    "dependencies":{
       "coffee-script":"*",
-      "bouncy":"*",
+      "trouncy":"*",
       "ipbind":"*"
    },
    "devDependencies":{
